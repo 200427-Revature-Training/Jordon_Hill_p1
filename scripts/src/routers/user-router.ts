@@ -3,31 +3,23 @@ import * as userService from '../services/user-service';
 
 export const userRouter = express.Router();
 
-/* GET */
-
-// Check if username exists, returns the user or "user does not exist"
-userRouter.get('/:user', (request, response, next) => {
-    const user = request.params.user;
-    userService.getUserByName(user).then(user => {
-        if (!user) {
-            response.sendStatus(404);
-        } else {
-            response.json(user);
-        }
-        next();
-    }).catch(err => {
-        console.log(err);
-        response.sendStatus(500);
-        next();
-    })
-});
-
 /* POST */
 
 // add user to database
-userRouter.post('', (request, response, next) => {
+userRouter.post('/login', (request, response, next) => {
+    const loginData = request.body;
+    userService.login(loginData)
+        .then(user => {
+            response.status(200);
+            response.json(user);
+            next();
+        }).catch(err => {
+            response.sendStatus(err);
+        });
+});
+
+userRouter.post('/', (request, response, next) => {
     const user = request.body;
-    console.log(user);
     userService.saveUser(user)
         .then(newUser => {
             response.status(201);

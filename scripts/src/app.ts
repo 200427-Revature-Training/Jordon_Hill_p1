@@ -1,13 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { db } from './daos/db';
-import { pokemonRouter } from './routers/pokemon-router';
-import { boxRouter } from './routers/box-router';
 import { userRouter } from './routers/user-router';
+import { reimburesmentRouter } from './routers/reimbursement-router';
+import { statusRouter } from './routers/status-router';
+import { typeRouter } from './routers/type-router';
 
 const app = express();
 
-const port = process.env.port || 3000;
+const port = process.env.port || 3002;
 app.set('port', port);
 
 process.title = "myApp"
@@ -22,14 +23,22 @@ app.use((request, response, next) => {
     response.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE")
     next();
 });
+app.use('/shutdown', (request, response, next) => {
+    if (request.ip !== "::ffff:172.31.45.201") {
+        response.send("Sender is not authorized to perform this task.\n");
+        next();
+    } else {
+        response.send("Now closing server.\n");
+        process.exit();
+    }
+});
 /*
     ? Router Registration
 */
 app.use('/users', userRouter);
-app.use('/box', boxRouter);
-app.use('/pokemon', pokemonRouter);
-app.use('/box', boxRouter);
-app.use('/pokemon', pokemonRouter);
+app.use('/reimbursements', reimburesmentRouter);
+app.use('/ststus', statusRouter);
+app.use('/type', typeRouter);
 
 process.on('unhandledRejection', () => {
     db.end().then(() => {
