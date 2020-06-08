@@ -31,7 +31,7 @@ export async function login(loginData: any): Promise<User> {
  */
 export async function saveUser(user: any): Promise<User> {
     // Data from the user cannot be trusted
-    if (!(user.username && user.password && user.email))
+    if (!(user.username && user.password && user.email && user.firstName && user.lastName))
         return new Promise((resolve, reject) => reject(422));
 
     const hashedpassword = hash.generate(user.password);

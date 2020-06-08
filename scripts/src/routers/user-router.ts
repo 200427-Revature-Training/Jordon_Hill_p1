@@ -5,10 +5,9 @@ export const userRouter = express.Router();
 
 /* POST */
 
-// add user to database
+// login
 userRouter.post('/login', (request, response, next) => {
-    const loginData = request.body;
-    userService.login(loginData)
+    userService.login(request.body)
         .then(user => {
             response.status(200);
             response.json(user);
@@ -18,9 +17,9 @@ userRouter.post('/login', (request, response, next) => {
         });
 });
 
+// add user to database
 userRouter.post('/', (request, response, next) => {
-    const user = request.body;
-    userService.saveUser(user)
+    userService.saveUser(request.body)
         .then(newUser => {
             response.status(201);
             response.json(newUser);

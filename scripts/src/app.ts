@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { db } from './daos/db';
 import { userRouter } from './routers/user-router';
-import { reimburesmentRouter } from './routers/reimbursement-router';
+import { reimbursementRouter } from './routers/reimbursement-router';
 import { statusRouter } from './routers/status-router';
 import { typeRouter } from './routers/type-router';
 
