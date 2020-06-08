@@ -9,18 +9,18 @@ export function getReimbursementsByUserID(userID: number): Promise<Reimbursement
     return reimbDao.getReimbursementsByUserID(userID);
 }
 
-export function getReimbursementsByStatus(status): Promise<Reimbursement[]> {
-    return reimbDao.getReimbursementsByStatus(status);
+export function getReimbursementsByStatus(statusID): Promise<Reimbursement[]> {
+    return reimbDao.getReimbursementsByStatus(statusID);
 }
 
-export function saveReimbursement(reimbursement: any): Promise<Reimbursement[]> {
+export function saveReimbursement(reimbursement: any): Promise<Reimbursement> {
     if(reimbursement.firstName && reimbursement.lastName && reimbursement.birthdate) {
         return new Promise((resolve, reject) => reject(422));
     }
     const newReimbursement = new Reimbursement(
         undefined, reimbursement.amount, new Date(reimbursement.dateSubmitted), undefined,
             reimbursement.description, reimbursement.receipt, reimbursement.authorID,
-            reimbursement.resolverID, reimbursement.statusID, reimbursement.typeID
+            undefined, 1, reimbursement.typeID
     );
     return reimbDao.saveReimbursement(newReimbursement);
 }

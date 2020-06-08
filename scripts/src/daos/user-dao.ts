@@ -19,7 +19,7 @@ export function getUserByUsername(name: string): Promise<User> {
  * @param user : User
  */
 export function saveUser(user: User): Promise<User> {
-    const sql = 'INSERT INTO project1.users (ers_username, ers_password, user_first_name,\
+    const sql = 'INSERT INTO project1.ers_users (ers_username, ers_password, user_first_name,\
         user_last_name, user_email, user_role_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
 
     return db.query<UserRow>(sql, [user.username, user.password, user.firstName, user.lastName,
