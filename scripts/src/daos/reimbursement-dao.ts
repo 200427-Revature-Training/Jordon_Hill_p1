@@ -35,7 +35,7 @@ export function getReimbursementsByStatus(statusID): Promise<Reimbursement[]> {
 }
 
 export function saveReimbursement(reimbursement: Reimbursement): Promise<Reimbursement> {
-    const sql = 'INSERT INTO project1.ers_users (reimb_amount, reimb_submitted, \
+    const sql = 'INSERT INTO project1.ers_reimbursement (reimb_amount, reimb_submitted, \
         reimb_description, reimb_receipt, reimb_author, reimb_status_id, reimb_type_id) \
         VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *';
 

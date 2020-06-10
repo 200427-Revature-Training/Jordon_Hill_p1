@@ -35,12 +35,13 @@ app.use('/shutdown', (request, response, next) => {
 /*
     ? Router Registration
 */
-app.use('/users', userRouter);
-app.use('/reimbursements', reimburesmentRouter);
-app.use('/ststus', statusRouter);
+app.use('/user', userRouter);
+app.use('/reimbursement', reimbursementRouter);
+app.use('/status', statusRouter);
 app.use('/type', typeRouter);
 
-process.on('unhandledRejection', () => {
+process.on('unhandledRejection', (err) => {
+    console.log(err)
     db.end().then(() => {
         console.log('Database pool closed');
     });

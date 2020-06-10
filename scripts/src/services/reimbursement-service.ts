@@ -37,5 +37,5 @@ export function updateReimbursement(reimbursement: any): Promise<Reimbursement> 
     if (!reimbursementData.id) {
         return new Promise((resolve, reject) => reject(400));
     }
-    return reimbDao.patchPerson(reimbursementData);
+    return reimbDao.updateReimbursement(reimbursementData);
 }

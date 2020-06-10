@@ -54,12 +54,7 @@ reimbursementRouter.post('/', (request, response, next) => {
         response.json(newReimbursement);
         next();
     }).catch(err => {
-        if (err === 409) {
-            response.status(409);
-            response.send("User already exists");
-        } else {
-            response.sendStatus(err);
-        }
+        response.sendStatus(err);
     });
 });
 

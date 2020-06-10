@@ -19,6 +19,7 @@ userRouter.post('/login', (request, response, next) => {
 
 // add user to database
 userRouter.post('/', (request, response, next) => {
+    console.log('router');
     userService.saveUser(request.body)
         .then(newUser => {
             response.status(201);
@@ -29,6 +30,7 @@ userRouter.post('/', (request, response, next) => {
                 response.status(409);
                 response.send("User already exists");
             } else {
+                console.log(err);
                 response.sendStatus(err);
             }
         });
