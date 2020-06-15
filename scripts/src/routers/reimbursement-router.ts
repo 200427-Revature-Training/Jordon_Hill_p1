@@ -30,10 +30,11 @@ reimbursementRouter.get('/:userID', (request, response, next) => {
     })
 });
 
-reimbursementRouter.get('/status/:statusID', (request, response, next) => {
+reimbursementRouter.get('/status/:statusID/type/:typeID', (request, response, next) => {
     const statusID: number = +request.params.statusID;
+    const typeID: number = +request.params.typeID;
 
-    reimbursementService.getReimbursementsByStatus(statusID).then(reimbursements => {
+    reimbursementService.getReimbursementsByStatusAndType(statusID, typeID).then(reimbursements => {
         if (!reimbursements) {
             response.sendStatus(404);
         } else {

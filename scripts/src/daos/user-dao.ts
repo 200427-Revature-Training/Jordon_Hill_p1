@@ -3,7 +3,7 @@ import { db } from './db';
 import { User, UserRow } from '../models/User';
 
 /**
- * getUserByName
+ * getUserByUsername
  * This function queries the database for the mathcing user name.
  * @param name : string
  */
