@@ -19,7 +19,6 @@ userRouter.post('/login', (request, response, next) => {
 
 // add user to database
 userRouter.post('/', (request, response, next) => {
-    console.log('router');
     userService.saveUser(request.body)
         .then(newUser => {
             response.status(201);

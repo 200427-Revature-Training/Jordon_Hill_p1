@@ -34,9 +34,9 @@ export async function saveUser(user: any): Promise<User> {
     if (!(user.username && user.password && user.email && user.firstName && user.lastName))
         return new Promise((resolve, reject) => reject(422));
 
-    const hashedpassword = hash.generate(user.password);
+    const hashedPassword = hash.generate(user.password);
     const newUser = new User(
-        undefined, user.username, hashedpassword, user.firstName, user.lastName, user.email,
+        undefined, user.username, hashedPassword, user.firstName, user.lastName, user.email,
             (user.roleID ? user.roleID : 1)
     );
     // check if user exists
